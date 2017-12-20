@@ -5,3 +5,5 @@ work/*
 *.aps
 *.suo
 *.vcxproj.user
+vs2005/build/
+bin/
