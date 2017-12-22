@@ -7,3 +7,4 @@ work/*
 *.vcxproj.user
 vs2005/build/
 bin/
+vs2005/PlaceIntoGame/
