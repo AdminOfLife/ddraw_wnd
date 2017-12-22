@@ -7,5 +7,6 @@ work/*
 *.vcxproj.user
 vs2005/build/
 bin/
+vs2005/PlaceIntoGame/
 vs2003/Debug/
-vs2003/Release/BuildLog.htm
+vs2003/Release/*
