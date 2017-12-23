@@ -1,5 +1,6 @@
 #include "common.h"
 #include "FakeDirectDrawN.h"
+#include "my_d3d.h"
 
 
 // Globals
@@ -19,7 +20,8 @@ NAKEDCALL void FakeDSoundHelp()						{ _asm { jmp [ddraw.DSoundHelp] } }
 HRESULT WINAPI FakeDirectDrawCreate( GUID FAR *lpGUID, LPDIRECTDRAW FAR *lplpDD, IUnknown FAR *pUnkOuter )			
 { 
 	//IDirectDraw *fdd = new FakeDirectDraw();
-	*lplpDD = glp_DirectDraw;
+	*lplpDD = new FakeDirectDraw();
+	//*lplpDD = glp_DirectDraw;
 	LOG(__FUNCTION__);
 	//MessageBox(NULL, "FUCK", "MUCK", MB_OK);
 	//_asm { jmp [ddraw.DirectDrawCreate] }

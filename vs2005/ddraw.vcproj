@@ -266,6 +266,14 @@
 				RelativePath="..\src\main.cpp"
 				>
 			</File>
+			<Filter
+				Name="d3d"
+				>
+				<File
+					RelativePath="..\src\d3d.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -282,6 +290,10 @@
 			</File>
 			<File
 				RelativePath="..\include\FakeDirectDrawN.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\my_d3d.h"
 				>
 			</File>
 		</Filter>
