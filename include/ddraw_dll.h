@@ -3,7 +3,7 @@
 
 /************ TYPEDEFS ***********/
 typedef HRESULT (WINAPI *FPDirectDrawCreate)( GUID FAR *, LPDIRECTDRAW FAR *, IUnknown FAR *);
-
+typedef HRESULT (WINAPI *FPDirectDrawEnumerateA)( LPDDENUMCALLBACK, LPVOID);
 extern ULONG *FakeDD[3];
 
 typedef struct
@@ -20,7 +20,7 @@ typedef struct
 	FPDirectDrawCreate DirectDrawCreate;
 	FARPROC	DirectDrawCreateClipper;
 	FARPROC	DirectDrawCreateEx;
-	FARPROC	DirectDrawEnumerateA;
+	FPDirectDrawEnumerateA DirectDrawEnumerateA;
 	FARPROC	DirectDrawEnumerateExA;
 	FARPROC	DirectDrawEnumerateExW;
 	FARPROC	DirectDrawEnumerateW;
