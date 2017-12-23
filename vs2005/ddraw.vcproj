@@ -211,7 +211,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="dxguid.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="D:\usr\lib"
 				ModuleDefinitionFile="..\src\main.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
