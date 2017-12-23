@@ -19,11 +19,13 @@ ddraw_dll ddraw;
 
 LPDIRECTDRAW glp_DirectDraw;
 LPDIRECTDRAW4 glp_DirectDraw4;
+LPDIRECT3D3 glp_Direct3D3;
+LPDIRECT3D7 glp_Direct3D7;
 
 void InitDirectDraw()
 {
 	glp_DirectDraw = new FakeDirectDraw();
-	glp_DirectDraw4 = new FakeDirectDraw4();
+	glp_DirectDraw4 = new FakeDirectDraw4(glp_DirectDraw);
 	LOG("---------------------------\n\n");
 }
 
@@ -48,7 +50,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 			}
 			install_hooks(&ddraw);
 			/********************/
-			InitDirectDraw();
+			//InitDirectDraw();
 			/********************/
 			LoadLibrary("wndmode.dll");
 		break;
