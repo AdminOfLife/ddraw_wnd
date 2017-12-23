@@ -59,7 +59,7 @@ public:
 	virtual HRESULT STDMETHODCALLTYPE QueryInterface(const IID &riid, void **ppvObject)
 	{
 		LOG(__FUNCTION__"---PIZDEC");
-		fprintf(log, "%x\n", riid.Data1);
+		fprintf(log, "%x-%x-%x-%x\n", riid.Data1, riid.Data2, riid.Data3, riid.Data4);
 		*ppvObject = (VOID*)lpdd4;
 		lpOrigDirectDraw->QueryInterface(riid, ppvObject);
 		return S_OK;
