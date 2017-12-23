@@ -40,10 +40,11 @@ NAKEDCALL void FakeDirectDrawCreateEx()
 	LOG(__FUNCTION__);
 	_asm { jmp [ddraw.DirectDrawCreateEx] } 
 }// HRESULT WINAPI DirectDrawEnumerateA( LPDDENUMCALLBACKA lpCallback, LPVOID lpContext );
-NAKEDCALL void FakeDirectDrawEnumerateA()			
+HRESULT WINAPI DirectDrawEnumerateA( LPDDENUMCALLBACKA lpCallback, LPVOID lpContext )		
 {
 	LOG(__FUNCTION__);
-	_asm { jmp [ddraw.DirectDrawEnumerateA] } 
+	//_asm { jmp [ddraw.DirectDrawEnumerateA] } 
+	ddraw.DirectDrawEnumerateA(lpCallback, lpContext);
 }
 // HRESULT WINAPI DirectDrawEnumerateExA( LPDDENUMCALLBACKEXA lpCallback, LPVOID lpContext, DWORD dwFlags );
 NAKEDCALL void FakeDirectDrawEnumerateExA()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.DirectDrawEnumerateExA] } }

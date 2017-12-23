@@ -68,13 +68,28 @@ public:
     STDMETHODIMP EnumDisplayModes( THIS_ DWORD first, LPDDSURFACEDESC2 second, LPVOID third, LPDDENUMMODESCALLBACK2 quad) 
 	{  
 		LOG(__FUNCTION__"---PIZDEC"); 
+		if (second != NULL)
+		{
+			fprintf(log, "number of back buffers requested: \n", second->dwBackBufferCount);
+		}
+		else fprintf(log, "second failed\n");
 		glp_DirectDraw4->EnumDisplayModes(first, second, third, quad);
+		if (second != NULL)
+		{
+			fprintf(log, "number of back buffers requested: \n", second->dwBackBufferCount);
+		}
+		else fprintf(log, "second failed\n");
 		return 0; 
 	
 	};
     STDMETHODIMP EnumSurfaces(THIS_ DWORD, LPDDSURFACEDESC2, LPVOID,LPDDENUMSURFACESCALLBACK2 ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP FlipToGDISurface(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP GetCaps( THIS_ LPDDCAPS, LPDDCAPS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP GetCaps( THIS_ LPDDCAPS first, LPDDCAPS second) 
+	{  
+		LOG(__FUNCTION__"---PIZDEC"); 
+		glp_DirectDraw4->GetCaps(first, second);
+		return 0; 
+	};
     STDMETHODIMP GetDisplayMode( THIS_ LPDDSURFACEDESC2) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP GetFourCCCodes(THIS_  LPDWORD, LPDWORD ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP GetGDISurface(THIS_ LPDIRECTDRAWSURFACE4 FAR *) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
@@ -85,15 +100,40 @@ public:
     STDMETHODIMP RestoreDisplayMode(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP SetCooperativeLevel(THIS_ HWND first, DWORD second) 
 	{  
-		LOG(__FUNCTION__); 
-		glp_DirectDraw4->SetCooperativeLevel(first, second);
+		LOG(__FUNCTION__);
+		fprintf(log, "HWND IS: %x\n", first);
+		glp_DirectDraw4->SetCooperativeLevel(first, second/* DDSCL_NORMAL*/);
 		return 0; 
 	};
-    STDMETHODIMP SetDisplayMode(THIS_ DWORD, DWORD,DWORD, DWORD, DWORD) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP SetDisplayMode(
+		THIS_ DWORD dwWidth, 
+		DWORD dwHeight,
+		DWORD dwBPP,
+		DWORD dwRefreshRate,
+		DWORD dwFlags )
+	{  
+		LOG(__FUNCTION__"---PIZDEC");
+		glp_DirectDraw4->SetDisplayMode(dwWidth, dwHeight, dwBPP, dwRefreshRate, dwFlags);
+		return 0; 
+	};
     STDMETHODIMP WaitForVerticalBlank(THIS_ DWORD, HANDLE ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     /*** Added in the v2 interface ***/
-    STDMETHODIMP GetAvailableVidMem(THIS_ LPDDSCAPS2, LPDWORD, LPDWORD) 
-	{  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP GetAvailableVidMem(THIS_ LPDDSCAPS2 first, LPDWORD second, LPDWORD third) 
+	{  
+		LOG(__FUNCTION__); 
+		glp_DirectDraw4->GetAvailableVidMem(first, second, third);
+		fprintf(log, 
+			"dwCaps:%d\n"
+			"dwCaps2:%d\n"
+			"dwCaps3:%d\n"
+			"dwCaps4:%d\n",
+			first->dwCaps,
+			first->dwCaps2,
+			first->dwCaps3,
+			first->dwCaps4
+			);
+		return 0; 
+	};
     /*** Added in the V4 Interface ***/
     STDMETHODIMP GetSurfaceFromDC (THIS_ HDC, LPDIRECTDRAWSURFACE4 *) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP RestoreAllSurfaces(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
@@ -102,9 +142,18 @@ public:
 	{  
 		HRESULT hr;
 		LOG(__FUNCTION__"");
-		fprintf(log, "device vendor = %x\n", dID->dwVendorId);
+		
 		hr = glp_DirectDraw4->GetDeviceIdentifier(dID, second);
-		fprintf(log, "device vendor = %x\n", dID->dwVendorId);
+		fprintf(log, 
+				"dID->dwVendorId = %x\n"
+				"dID->dwDeviceId = %x\n"
+				"dID->dwSubSysId = %x\n"
+				"dID->dwRevision = %x\n",
+				dID->dwVendorId,
+				dID->dwDeviceId,
+				dID->dwSubSysId,
+				dID->dwRevision
+				);
 		fflush(log);
 		return hr;
 	}
@@ -112,6 +161,7 @@ public:
 	{
 		this->lpOrigDirectDraw4 = lpOrigDirectDraw4;
 	}
+
 };
 class FakeDirectDraw: public IDirectDraw
 {

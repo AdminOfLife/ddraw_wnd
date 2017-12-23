@@ -16,7 +16,7 @@ void install_hooks(ddraw_dll *ddraw)
 	ddraw->DirectDrawCreate				= (FPDirectDrawCreate)GetProcAddress(ddraw->dll, "DirectDrawCreate");
 	ddraw->DirectDrawCreateClipper		= GetProcAddress(ddraw->dll, "DirectDrawCreateClipper");
 	ddraw->DirectDrawCreateEx			= GetProcAddress(ddraw->dll, "DirectDrawCreateEx");
-	ddraw->DirectDrawEnumerateA			= GetProcAddress(ddraw->dll, "DirectDrawEnumerateA");
+	ddraw->DirectDrawEnumerateA			= (FPDirectDrawEnumerateA)GetProcAddress(ddraw->dll, "DirectDrawEnumerateA");
 	ddraw->DirectDrawEnumerateExA		= GetProcAddress(ddraw->dll, "DirectDrawEnumerateExA");
 	ddraw->DirectDrawEnumerateExW		= GetProcAddress(ddraw->dll, "DirectDrawEnumerateExW");
 	ddraw->DirectDrawEnumerateW			= GetProcAddress(ddraw->dll, "DirectDrawEnumerateW");
