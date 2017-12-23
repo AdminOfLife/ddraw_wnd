@@ -32,7 +32,7 @@ public:
 		//lpOrigDirectDraw->QueryInterface(riid, (LPVOID*)&tmp);
 
 		LOG("BEFORE QUERY_INTERFACE");
-		lpOrigDirectDraw->QueryInterface(riid, (LPVOID*)&tmp);
+		glp_DirectDraw4->QueryInterface(riid, (LPVOID*)&tmp);
 		LOG("AFTER QUERY_INTERFACE");
 		if (IsEqualIID(IID_IDirect3D3, riid))
 		{
@@ -43,14 +43,35 @@ public:
 		return 0; 
 	};
     STDMETHOD_(ULONG,AddRef) (THIS)  {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHOD_(ULONG,Release) (THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHOD_(ULONG,Release) (THIS) 
+	{  
+		LOG(__FUNCTION__"---PIZDEC"); 
+		glp_DirectDraw4->Release();
+		return 0; 
+	};
     /*** IDirectDraw methods ***/
     STDMETHODIMP Compact(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP CreateClipper(THIS_ DWORD, LPDIRECTDRAWCLIPPER FAR*, IUnknown FAR * ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP CreateClipper(THIS_ DWORD first, LPDIRECTDRAWCLIPPER FAR* second, IUnknown FAR * ) 
+	{  
+		LOG(__FUNCTION__"---PIZDEC"); 
+		glp_DirectDraw4->CreateClipper(first, second, NULL);
+		return 0; 
+	};
     STDMETHODIMP CreatePalette(THIS_ DWORD, LPPALETTEENTRY, LPDIRECTDRAWPALETTE FAR*, IUnknown FAR * ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP CreateSurface(THIS_  LPDDSURFACEDESC2, LPDIRECTDRAWSURFACE4 FAR *, IUnknown FAR *) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP CreateSurface(THIS_  LPDDSURFACEDESC2 first, LPDIRECTDRAWSURFACE4 FAR * second, IUnknown FAR *)
+	{  
+		LOG(__FUNCTION__"---PIZDEC"); 
+		return glp_DirectDraw4->CreateSurface(first, second, NULL);
+		//return 0; 
+	};
     STDMETHODIMP DuplicateSurface( THIS_ LPDIRECTDRAWSURFACE4, LPDIRECTDRAWSURFACE4 FAR * ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP EnumDisplayModes( THIS_ DWORD, LPDDSURFACEDESC2, LPVOID, LPDDENUMMODESCALLBACK2 ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP EnumDisplayModes( THIS_ DWORD first, LPDDSURFACEDESC2 second, LPVOID third, LPDDENUMMODESCALLBACK2 quad) 
+	{  
+		LOG(__FUNCTION__"---PIZDEC"); 
+		glp_DirectDraw4->EnumDisplayModes(first, second, third, quad);
+		return 0; 
+	
+	};
     STDMETHODIMP EnumSurfaces(THIS_ DWORD, LPDDSURFACEDESC2, LPVOID,LPDDENUMSURFACESCALLBACK2 ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP FlipToGDISurface(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP GetCaps( THIS_ LPDDCAPS, LPDDCAPS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
@@ -62,7 +83,12 @@ public:
     STDMETHODIMP GetVerticalBlankStatus(THIS_ LPBOOL ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP Initialize(THIS_ GUID FAR *) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP RestoreDisplayMode(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP SetCooperativeLevel(THIS_ HWND, DWORD) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
+    STDMETHODIMP SetCooperativeLevel(THIS_ HWND first, DWORD second) 
+	{  
+		LOG(__FUNCTION__); 
+		glp_DirectDraw4->SetCooperativeLevel(first, second);
+		return 0; 
+	};
     STDMETHODIMP SetDisplayMode(THIS_ DWORD, DWORD,DWORD, DWORD, DWORD) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP WaitForVerticalBlank(THIS_ DWORD, HANDLE ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     /*** Added in the v2 interface ***/
