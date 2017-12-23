@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="D:\usr\include; ..\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;DDRAW_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -60,7 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="dxguid.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="D:\usr\lib"
 				ModuleDefinitionFile="..\src\main.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -298,6 +301,14 @@
 				RelativePath="..\src\my_d3d.h"
 				>
 			</File>
+			<Filter
+				Name="ddraw"
+				>
+				<File
+					RelativePath=".\DirectDrawSurface4.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

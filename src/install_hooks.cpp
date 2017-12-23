@@ -8,7 +8,7 @@
 ULONG *FakeDD[3];
 
 
-NAKEDCALL void FakeAcquireDDThreadLock()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.AcquireDDThreadLock] } }
+NAKEDCALL void FakeAcquireDDThreadLock()			{ /*LOG(__FUNCTION__);*/  _asm { jmp [ddraw.AcquireDDThreadLock] } }
 NAKEDCALL void FakeCheckFullscreen()				{ LOG(__FUNCTION__);  _asm { jmp [ddraw.CheckFullscreen] } }
 NAKEDCALL void FakeCompleteCreateSysmemSurface()	{ LOG(__FUNCTION__);  _asm { jmp [ddraw.CompleteCreateSysmemSurface] } }
 NAKEDCALL void FakeD3DParseUnknownCommand()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.D3DParseUnknownCommand] } }
@@ -40,11 +40,13 @@ NAKEDCALL void FakeDirectDrawCreateEx()
 	LOG(__FUNCTION__);
 	_asm { jmp [ddraw.DirectDrawCreateEx] } 
 }// HRESULT WINAPI DirectDrawEnumerateA( LPDDENUMCALLBACKA lpCallback, LPVOID lpContext );
-HRESULT WINAPI DirectDrawEnumerateA( LPDDENUMCALLBACKA lpCallback, LPVOID lpContext )		
+HRESULT WINAPI FakeDirectDrawEnumerateA( LPDDENUMCALLBACKA lpCallback, LPVOID lpContext )		
 {
+	HRESULT hr;
 	LOG(__FUNCTION__);
 	//_asm { jmp [ddraw.DirectDrawEnumerateA] } 
-	ddraw.DirectDrawEnumerateA(lpCallback, lpContext);
+	hr = ddraw.DirectDrawEnumerateA(lpCallback, lpContext);
+	return hr;
 }
 // HRESULT WINAPI DirectDrawEnumerateExA( LPDDENUMCALLBACKEXA lpCallback, LPVOID lpContext, DWORD dwFlags );
 NAKEDCALL void FakeDirectDrawEnumerateExA()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.DirectDrawEnumerateExA] } }
@@ -58,4 +60,4 @@ NAKEDCALL void FakeGetDDSurfaceLocal()				{ LOG(__FUNCTION__);  _asm { jmp [ddra
 NAKEDCALL void FakeGetOLEThunkData()				{ LOG(__FUNCTION__);  _asm { jmp [ddraw.GetOLEThunkData] } }
 NAKEDCALL void FakeGetSurfaceFromDC()				{ LOG(__FUNCTION__);  _asm { jmp [ddraw.GetSurfaceFromDC] } }
 NAKEDCALL void FakeRegisterSpecialCase()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.RegisterSpecialCase] } }
-NAKEDCALL void FakeReleaseDDThreadLock()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.ReleaseDDThreadLock] } }
+NAKEDCALL void FakeReleaseDDThreadLock()			{ /*LOG(__FUNCTION__);*/  _asm { jmp [ddraw.ReleaseDDThreadLock] } }

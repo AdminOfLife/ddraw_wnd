@@ -69,7 +69,15 @@ public:
 		return 0; 
 	};
     STDMETHOD(CreateLight)(THIS_ LPDIRECT3DLIGHT*,LPUNKNOWN) {  LOG(__FUNCTION__"---"); return 0; };
-    STDMETHOD(CreateMaterial)(THIS_ LPDIRECT3DMATERIAL3*,LPUNKNOWN) {  LOG(__FUNCTION__"---"); return 0; };
+    STDMETHOD(CreateMaterial)(
+		LPDIRECT3DMATERIAL3* lplpDirect3DMaterial,  
+		IUnknown* pUnkOuter                         
+	)
+	{  
+		LOG(__FUNCTION__); 
+		glp_Direct3D3->CreateMaterial(lplpDirect3DMaterial, pUnkOuter);
+		return 0; 
+	};
     STDMETHOD(CreateViewport)(THIS_ LPDIRECT3DVIEWPORT3 * first,LPUNKNOWN second) 
 	{  
 		LOG(__FUNCTION__"---"); 
@@ -79,8 +87,14 @@ public:
     STDMETHOD(FindDevice)(THIS_ LPD3DFINDDEVICESEARCH,LPD3DFINDDEVICERESULT) {  LOG(__FUNCTION__"---"); return 0; };
     STDMETHOD(CreateDevice)(THIS_ REFCLSID cls,LPDIRECTDRAWSURFACE4 surf,LPDIRECT3DDEVICE3* dev,LPUNKNOWN unk) 
 	{  
+		HRESULT hr;
 		LOG(__FUNCTION__"---"); 
-		glp_Direct3D3->CreateDevice(cls, surf, dev, unk);
+		hr = glp_Direct3D3->CreateDevice(cls, surf, dev, unk);
+		if (FAILED(hr))
+		{
+			fprintf(log, "Create device failed!\n");
+		}
+		else fprintf(log, "Create device succeed!\n");
 		return 0; 
 	};
     STDMETHOD(CreateVertexBuffer)(THIS_ LPD3DVERTEXBUFFERDESC,LPDIRECT3DVERTEXBUFFER*,DWORD,LPUNKNOWN) {  LOG(__FUNCTION__"---"); return 0; };
