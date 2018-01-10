@@ -7,3 +7,5 @@ work/*
 *.vcxproj.user
 vs2005/build/
 bin/
+vs2003/Debug/
+vs2003/Release/BuildLog.htm
