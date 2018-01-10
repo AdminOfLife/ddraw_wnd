@@ -12,3 +12,7 @@ vs2003/Debug/
 vs2003/Release/*
 vs2003/build/
 vs2003/ddraw.vcproj.old
+vs2008/PlaceIntoGame/
+vs2008/build/
+vs2008/_UpgradeReport_Files/
+vs2008/UpgradeLog.XML

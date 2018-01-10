@@ -21,6 +21,7 @@ LPDIRECTDRAW glp_DirectDraw;
 LPDIRECTDRAW4 glp_DirectDraw4;
 LPDIRECT3D3 glp_Direct3D3;
 LPDIRECT3D7 glp_Direct3D7;
+LPFAKEDIRECT3D3 glp_FakeDirect3D3;
 
 void InitDirectDraw()
 {

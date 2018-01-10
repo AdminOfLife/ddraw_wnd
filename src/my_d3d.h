@@ -1,6 +1,8 @@
 #pragma once
-#include <d3d.h>
+
+
 #include "common.h"
+//typedef HRESULT (CALLBACK * LPD3DENUMDEVICESCALLBACK)(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR lpDeviceName, LPD3DDEVICEDESC, LPD3DDEVICEDESC, LPVOID);
 
 
 
@@ -10,7 +12,7 @@ class FakeDirect3D7: public IDirect3D7
 public:
 	FakeDirect3D7()
 	{
-		LOG(__FUNCTION__"---PIZDEC");
+		LOG(__FUNCTION__);
 	}
 	/*** IUnknown methods ***/
     STDMETHOD(QueryInterface)(THIS_ REFIID riid, LPVOID * ppvObj) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
@@ -30,6 +32,7 @@ class FakeDirect3D3: public IDirect3D3
 {
 private:
 	LPDIRECT3D7 lpd3d7;
+	LPD3DENUMDEVICESCALLBACK origCallBack;
 public:
 	void FakeDirect3d3()
 	{
@@ -64,8 +67,18 @@ public:
     /*** IDirect3D3 methods ***/
     STDMETHOD(EnumDevices)(THIS_ LPD3DENUMDEVICESCALLBACK first,LPVOID second) 
 	{  
-		LOG(__FUNCTION__"---"); 
-		glp_Direct3D3->EnumDevices(first, second);
+		LOG(__FUNCTION__"---");
+		//typedef HRESULT (FAR PASCAL * LPD3DENUMDEVICESCALLBACK)
+		//(LPGUID lpGuid,                     
+		//LPSTR lpDeviceDescription,          
+		//LPSTR lpDeviceName,                 
+		//LPD3DDEVICEDESC lpD3DHWDeviceDesc,  
+		//LPD3DDEVICEDESC lpD3DHELD9eviceDesc,  
+		//LPVOID lpUserArg                    
+		//);
+
+		origCallBack = first;
+		glp_Direct3D3->EnumDevices(origCallBack, second);
 		return 0; 
 	};
     STDMETHOD(CreateLight)(THIS_ LPDIRECT3DLIGHT*,LPUNKNOWN) {  LOG(__FUNCTION__"---"); return 0; };
@@ -105,4 +118,33 @@ public:
 		return 0; 
 	};
     STDMETHOD(EvictManagedTextures)(THIS) {  LOG(__FUNCTION__"---"); return 0; };
+	LPD3DENUMDEVICESCALLBACK GetOrigEnumDevices()
+	{
+		return origCallBack;
+	}
+	static HRESULT FAR PASCAL enumDevicesCallBack(
+		GUID FAR* lpGuid,                    
+		LPSTR lpDeviceDescription,           
+		LPSTR lpDeviceName,                  
+		LPD3DDEVICEDESC lpD3DHWDeviceDesc,   
+		LPD3DDEVICEDESC lpD3DHELDeviceDesc,  
+		LPVOID lpContext                     
+	)
+	{
+		fprintf(
+			log,
+			"device desc: %s\n", lpDeviceDescription
+		);
+		HRESULT hr;
+		//return (glp_FakeDirect3D3->GetOrigEnumDevices())->origCallBack(
+		//	lpGuid,                    
+		//	lpDeviceDescription,           
+		//	lpDeviceName,                  
+		//	lpD3DHWDeviceDesc,   
+		//	lpD3DHELDeviceDesc,  
+		//	lpContext
+		//	);
+	}
+
 };
+

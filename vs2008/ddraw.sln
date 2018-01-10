@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ddraw", "ddraw.vcproj", "{21D32C66-EA34-43F8-BB78-8706A115A45F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		PlaceIntoGame|Win32 = PlaceIntoGame|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21D32C66-EA34-43F8-BB78-8706A115A45F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{21D32C66-EA34-43F8-BB78-8706A115A45F}.Debug|Win32.Build.0 = Debug|Win32
+		{21D32C66-EA34-43F8-BB78-8706A115A45F}.PlaceIntoGame|Win32.ActiveCfg = PlaceIntoGame|Win32
+		{21D32C66-EA34-43F8-BB78-8706A115A45F}.PlaceIntoGame|Win32.Build.0 = PlaceIntoGame|Win32
+		{21D32C66-EA34-43F8-BB78-8706A115A45F}.Release|Win32.ActiveCfg = Release|Win32
+		{21D32C66-EA34-43F8-BB78-8706A115A45F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -18,7 +18,8 @@ public:
 		LOG("DDRAW4 CREATED");
 		LOG(__FUNCTION__);
 		this->lpOrigDirectDraw = lpOrigDirectDraw;
-		lpd3d3 = new FakeDirect3D3();
+		lpd3d3 = glp_FakeDirect3D3 = new FakeDirect3D3();
+		//lpd3d3 = new FakeDirect3D3();
 
 	}
     /*** IUnknown methods ***/
