@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ddraw", "ddraw.vcproj", "{2CDD7D76-3C83-477F-A9BE-6A73C6069B02}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{2CDD7D76-3C83-477F-A9BE-6A73C6069B02}.Debug.ActiveCfg = Debug|Win32
+		{2CDD7D76-3C83-477F-A9BE-6A73C6069B02}.Debug.Build.0 = Debug|Win32
+		{2CDD7D76-3C83-477F-A9BE-6A73C6069B02}.Release.ActiveCfg = Release|Win32
+		{2CDD7D76-3C83-477F-A9BE-6A73C6069B02}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
