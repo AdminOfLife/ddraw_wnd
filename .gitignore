@@ -10,3 +10,5 @@ bin/
 vs2005/PlaceIntoGame/
 vs2003/Debug/
 vs2003/Release/*
+vs2003/build/
+vs2003/ddraw.vcproj.old
