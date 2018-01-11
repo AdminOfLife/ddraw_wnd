@@ -290,6 +290,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="ddraw"
+				>
+				<File
+					RelativePath="..\src\DirectDrawSurface.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -320,7 +328,11 @@
 				Name="ddraw"
 				>
 				<File
-					RelativePath=".\DirectDrawSurface4.h"
+					RelativePath="..\src\DirectDrawSurface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\DirectDrawSurface4.h"
 					>
 				</File>
 			</Filter>

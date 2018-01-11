@@ -19,6 +19,7 @@ ddraw_dll ddraw;
 
 LPDIRECTDRAW glp_DirectDraw;
 LPDIRECTDRAW4 glp_DirectDraw4;
+LPDIRECTDRAWSURFACE glp_DirectDrawSurface;
 LPDIRECTDRAWSURFACE4 glp_DirectDrawSurface4;
 LPDIRECT3D3 glp_Direct3D3;
 LPDIRECT3DDEVICE3 glp_Direct3DDeviece3;

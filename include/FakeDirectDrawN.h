@@ -71,7 +71,8 @@ public:
 	{
 		HRESULT hr;
 		LOG(__FUNCTION__"---PIZDEC"); 
-		hr = glp_DirectDraw4->CreateSurface(lpDDSurfaceDesc2, lplpDDSurface, pUnkOuter);
+		hr = glp_DirectDraw4->CreateSurface(lpDDSurfaceDesc2, &glp_DirectDrawSurface4, pUnkOuter);
+		*lplpDDSurface = lpOrigDirectDrawSurface4;
 		return hr;
 		//return 0; 
 	};

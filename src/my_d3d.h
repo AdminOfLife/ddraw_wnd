@@ -117,7 +117,7 @@ public:
 	{
 		HRESULT hr = 0;
 		LOG(__FUNCTION__);
-
+		hr = glp_Direct3DDeviece3->Release();
 		
 		return hr;
 	}

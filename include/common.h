@@ -20,6 +20,7 @@ extern ddraw_dll ddraw;
 extern FILE *log;
 extern LPDIRECTDRAW glp_DirectDraw;
 extern LPDIRECTDRAW4 glp_DirectDraw4;
+extern LPDIRECTDRAWSURFACE glp_DirectDrawSurface;
 extern LPDIRECTDRAWSURFACE4 glp_DirectDrawSurface4;
 extern LPDIRECT3D3 glp_Direct3D3;
 extern LPDIRECT3D7 glp_Direct3D7;
