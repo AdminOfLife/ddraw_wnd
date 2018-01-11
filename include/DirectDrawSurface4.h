@@ -243,12 +243,12 @@ public:
 		hr = glp_DirectDrawSurface4->Lock(lpDestRect, lpDDSurfaceDesc, dwFlags, hEvent);
 		return hr;
 	}
-    STDMETHODIMP ReleaseDC(THIS_ HDC)
+    STDMETHODIMP ReleaseDC(THIS_ HDC hDC)
 	{
 		HRESULT hr = 0;
 		LOG(__FUNCTION__);
 
-		//hr = glp_DirectDrawSurface4->ReleaseDC( );
+		hr = glp_DirectDrawSurface4->ReleaseDC(hDC);
 		return hr;
 	}
     STDMETHODIMP Restore(THIS)

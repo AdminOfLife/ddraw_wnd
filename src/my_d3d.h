@@ -554,7 +554,11 @@ public:
 	};
     STDMETHOD_(ULONG,AddRef)(THIS) {  LOG(__FUNCTION__"---"); return 0; };
     STDMETHOD_(ULONG,Release)(THIS) 
-	{  LOG(__FUNCTION__"---"); return glp_Direct3D3->Release(); };
+	{
+		LOG(__FUNCTION__"---"); 
+		
+		return glp_Direct3D3->Release();
+	};
 
     /*** IDirect3D3 methods ***/
     STDMETHOD(EnumDevices)(THIS_ LPD3DENUMDEVICESCALLBACK first,LPVOID second) 

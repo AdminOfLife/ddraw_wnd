@@ -27,7 +27,7 @@
 		HRESULT hr = 0;
 		LOG(__FUNCTION__);
 
-		hr = glp_DirectDrawSurface->AddRef( );
+		hr = glp_DirectDrawSurface->Release( );
 		return hr;
 	}
     /*** IDirectDrawSurface methods ***/
@@ -215,12 +215,12 @@
 		//hr = glp_DirectDrawSurface->Lock( );
 		return hr;
 	}
-    STDMETHODIMP FakeDirectDrawSurface::ReleaseDC(THIS_ HDC)
+    STDMETHODIMP FakeDirectDrawSurface::ReleaseDC(THIS_ HDC hDC)
 	{
 		HRESULT hr = 0;
 		LOG(__FUNCTION__);
 
-		//hr = glp_DirectDrawSurface->ReleaseDC( );
+		hr = glp_DirectDrawSurface->ReleaseDC(hDC);
 		return hr;
 	}
     STDMETHODIMP FakeDirectDrawSurface::Restore(THIS)

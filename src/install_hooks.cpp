@@ -16,13 +16,14 @@ BOOL WINAPI DDEnumCallback(
 	LPVOID lpContext
 	)
 {
+	int res;
 	fprintf(
 		log, 
 		"DriverDescription: %s\n"
 		"DriverName: %s\n",
 		lpDriverDescription,
 		lpDriverName);
-	origDDEnumCallback(  
+	res = origDDEnumCallback(  
 		lpGUID,           
 		lpDriverDescription,
 		lpDriverName,
