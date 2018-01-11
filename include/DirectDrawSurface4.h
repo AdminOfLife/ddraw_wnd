@@ -1,53 +1,363 @@
-FakeDirectDrawSurface4: public IDirectDrawSurface4
+#include "common.h"
+
+class FakeDirectDrawSurface4: public IDirectDrawSurface4
 {
-    /*** IUnknown methods ***/
-    STDMETHOD(QueryInterface) (THIS_ REFIID riid, LPVOID FAR * ppvObj) PURE;
-    STDMETHOD_(ULONG,AddRef) (THIS)  PURE;
-    STDMETHOD_(ULONG,Release) (THIS) PURE;
+private:
+
+public:
+	FakeDirectDrawSurface4()
+	{
+		
+	}
+/*** IUnknown methods ***/
+    STDMETHODIMP QueryInterface(THIS_ REFIID riid, LPVOID FAR * ppvObj)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->QueryInterface( );
+		return hr;
+	}
+    STDMETHOD_(ULONG,AddRef) (THIS);
+    STDMETHOD_(ULONG,Release) (THIS);
     /*** IDirectDrawSurface methods ***/
-    STDMETHOD(AddAttachedSurface)(THIS_ LPDIRECTDRAWSURFACE4) PURE;
-    STDMETHOD(AddOverlayDirtyRect)(THIS_ LPRECT) PURE;
-    STDMETHOD(Blt)(THIS_ LPRECT,LPDIRECTDRAWSURFACE4, LPRECT,DWORD, LPDDBLTFX) PURE;
-    STDMETHOD(BltBatch)(THIS_ LPDDBLTBATCH, DWORD, DWORD ) PURE;
-    STDMETHOD(BltFast)(THIS_ DWORD,DWORD,LPDIRECTDRAWSURFACE4, LPRECT,DWORD) PURE;
-    STDMETHOD(DeleteAttachedSurface)(THIS_ DWORD,LPDIRECTDRAWSURFACE4) PURE;
-    STDMETHOD(EnumAttachedSurfaces)(THIS_ LPVOID,LPDDENUMSURFACESCALLBACK2) PURE;
-    STDMETHOD(EnumOverlayZOrders)(THIS_ DWORD,LPVOID,LPDDENUMSURFACESCALLBACK2) PURE;
-    STDMETHOD(Flip)(THIS_ LPDIRECTDRAWSURFACE4, DWORD) PURE;
-    STDMETHOD(GetAttachedSurface)(THIS_ LPDDSCAPS2, LPDIRECTDRAWSURFACE4 FAR *) PURE;
-    STDMETHOD(GetBltStatus)(THIS_ DWORD) PURE;
-    STDMETHOD(GetCaps)(THIS_ LPDDSCAPS2) PURE;
-    STDMETHOD(GetClipper)(THIS_ LPDIRECTDRAWCLIPPER FAR*) PURE;
-    STDMETHOD(GetColorKey)(THIS_ DWORD, LPDDCOLORKEY) PURE;
-    STDMETHOD(GetDC)(THIS_ HDC FAR *) PURE;
-    STDMETHOD(GetFlipStatus)(THIS_ DWORD) PURE;
-    STDMETHOD(GetOverlayPosition)(THIS_ LPLONG, LPLONG ) PURE;
-    STDMETHOD(GetPalette)(THIS_ LPDIRECTDRAWPALETTE FAR*) PURE;
-    STDMETHOD(GetPixelFormat)(THIS_ LPDDPIXELFORMAT) PURE;
-    STDMETHOD(GetSurfaceDesc)(THIS_ LPDDSURFACEDESC2) PURE;
-    STDMETHOD(Initialize)(THIS_ LPDIRECTDRAW, LPDDSURFACEDESC2) PURE;
-    STDMETHOD(IsLost)(THIS) PURE;
-    STDMETHOD(Lock)(THIS_ LPRECT,LPDDSURFACEDESC2,DWORD,HANDLE) PURE;
-    STDMETHOD(ReleaseDC)(THIS_ HDC) PURE;
-    STDMETHOD(Restore)(THIS) PURE;
-    STDMETHOD(SetClipper)(THIS_ LPDIRECTDRAWCLIPPER) PURE;
-    STDMETHOD(SetColorKey)(THIS_ DWORD, LPDDCOLORKEY) PURE;
-    STDMETHOD(SetOverlayPosition)(THIS_ LONG, LONG ) PURE;
-    STDMETHOD(SetPalette)(THIS_ LPDIRECTDRAWPALETTE) PURE;
-    STDMETHOD(Unlock)(THIS_ LPRECT) PURE;
-    STDMETHOD(UpdateOverlay)(THIS_ LPRECT, LPDIRECTDRAWSURFACE4,LPRECT,DWORD, LPDDOVERLAYFX) PURE;
-    STDMETHOD(UpdateOverlayDisplay)(THIS_ DWORD) PURE;
-    STDMETHOD(UpdateOverlayZOrder)(THIS_ DWORD, LPDIRECTDRAWSURFACE4) PURE;
+    STDMETHODIMP AddAttachedSurface(THIS_ LPDIRECTDRAWSURFACE4)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->AddAttachedSurface( );
+		return hr;
+	}
+    STDMETHODIMP AddOverlayDirtyRect(THIS_ LPRECT)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->AddOverlayDirtyRect( );
+		return hr;
+	}
+    STDMETHODIMP Blt(THIS_ LPRECT,LPDIRECTDRAWSURFACE4, LPRECT,DWORD, LPDDBLTFX)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->Blt( );
+		return hr;
+	}
+    STDMETHODIMP BltBatch(THIS_ LPDDBLTBATCH, DWORD, DWORD )
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->BltBatch( );
+		return hr;
+	}
+    STDMETHODIMP BltFast(THIS_ DWORD,DWORD,LPDIRECTDRAWSURFACE4, LPRECT,DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->BltFast( );
+		return hr;
+	}
+    STDMETHODIMP DeleteAttachedSurface(THIS_ DWORD,LPDIRECTDRAWSURFACE4)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->DeleteAttachedSurface( );
+		return hr;
+	}
+    STDMETHODIMP EnumAttachedSurfaces(THIS_ LPVOID,LPDDENUMSURFACESCALLBACK2)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->EnumAttachedSurfaces( );
+		return hr;
+	}
+    STDMETHODIMP EnumOverlayZOrders(THIS_ DWORD,LPVOID,LPDDENUMSURFACESCALLBACK2)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->EnumOverlayZOrders( );
+		return hr;
+	}
+    STDMETHODIMP Flip(THIS_ LPDIRECTDRAWSURFACE4, DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->Flip( );
+		return hr;
+	}
+    STDMETHODIMP GetAttachedSurface(THIS_ LPDDSCAPS2, LPDIRECTDRAWSURFACE4 FAR *)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetAttachedSurface( );
+		return hr;
+	}
+    STDMETHODIMP GetBltStatus(THIS_ DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetBltStatus( );
+		return hr;
+	}
+    STDMETHODIMP GetCaps(THIS_ LPDDSCAPS2)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetCaps( );
+		return hr;
+	}
+    STDMETHODIMP GetClipper(THIS_ LPDIRECTDRAWCLIPPER FAR*)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetClipper( );
+		return hr;
+	}
+    STDMETHODIMP GetColorKey(THIS_ DWORD, LPDDCOLORKEY)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetColorKey( );
+		return hr;
+	}
+    STDMETHODIMP GetDC(THIS_ HDC FAR *)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetDC( );
+		return hr;
+	}
+    STDMETHODIMP GetFlipStatus(THIS_ DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetFlipStatus( );
+		return hr;
+	}
+    STDMETHODIMP GetOverlayPosition(THIS_ LPLONG, LPLONG )
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetOverlayPosition( );
+		return hr;
+	}
+    STDMETHODIMP GetPalette(THIS_ LPDIRECTDRAWPALETTE FAR*)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetPalette( );
+		return hr;
+	}
+    STDMETHODIMP GetPixelFormat(THIS_ LPDDPIXELFORMAT)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetPixelFormat( );
+		return hr;
+	}
+    STDMETHODIMP GetSurfaceDesc(THIS_ LPDDSURFACEDESC2)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetSurfaceDesc( );
+		return hr;
+	}
+    STDMETHODIMP Initialize(THIS_ LPDIRECTDRAW, LPDDSURFACEDESC2)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->Initialize( );
+		return hr;
+	}
+    STDMETHODIMP IsLost(THIS)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->IsLost( );
+		return hr;
+	}
+    STDMETHODIMP Lock(THIS_ LPRECT,LPDDSURFACEDESC2,DWORD,HANDLE)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->Lock( );
+		return hr;
+	}
+    STDMETHODIMP ReleaseDC(THIS_ HDC)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->ReleaseDC( );
+		return hr;
+	}
+    STDMETHODIMP Restore(THIS)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->Restore( );
+		return hr;
+	}
+    STDMETHODIMP SetClipper(THIS_ LPDIRECTDRAWCLIPPER)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->SetClipper( );
+		return hr;
+	}
+    STDMETHODIMP SetColorKey(THIS_ DWORD, LPDDCOLORKEY)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->SetColorKey( );
+		return hr;
+	}
+    STDMETHODIMP SetOverlayPosition(THIS_ LONG, LONG )
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->SetOverlayPosition( );
+		return hr;
+	}
+    STDMETHODIMP SetPalette(THIS_ LPDIRECTDRAWPALETTE)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->SetPalette( );
+		return hr;
+	}
+    STDMETHODIMP Unlock(THIS_ LPRECT)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->Unlock( );
+		return hr;
+	}
+    STDMETHODIMP UpdateOverlay(THIS_ LPRECT, LPDIRECTDRAWSURFACE4,LPRECT,DWORD, LPDDOVERLAYFX)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->UpdateOverlay( );
+		return hr;
+	}
+    STDMETHODIMP UpdateOverlayDisplay(THIS_ DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->UpdateOverlayDisplay( );
+		return hr;
+	}
+    STDMETHODIMP UpdateOverlayZOrder(THIS_ DWORD, LPDIRECTDRAWSURFACE4)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->UpdateOverlayZOrder( );
+		return hr;
+	}
     /*** Added in the v2 interface ***/
-    STDMETHOD(GetDDInterface)(THIS_ LPVOID FAR *) PURE;
-    STDMETHOD(PageLock)(THIS_ DWORD) PURE;
-    STDMETHOD(PageUnlock)(THIS_ DWORD) PURE;
+    STDMETHODIMP GetDDInterface(THIS_ LPVOID FAR *)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetDDInterface( );
+		return hr;
+	}
+    STDMETHODIMP PageLock(THIS_ DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->PageLock( );
+		return hr;
+	}
+    STDMETHODIMP PageUnlock(THIS_ DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->PageUnlock( );
+		return hr;
+	}
     /*** Added in the v3 interface ***/
-    STDMETHOD(SetSurfaceDesc)(THIS_ LPDDSURFACEDESC2, DWORD) PURE;
+    STDMETHODIMP SetSurfaceDesc(THIS_ LPDDSURFACEDESC2, DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->SetSurfaceDesc( );
+		return hr;
+	}
     /*** Added in the v4 interface ***/
-    STDMETHOD(SetPrivateData)(THIS_ REFGUID, LPVOID, DWORD, DWORD) PURE;
-    STDMETHOD(GetPrivateData)(THIS_ REFGUID, LPVOID, LPDWORD) PURE;
-    STDMETHOD(FreePrivateData)(THIS_ REFGUID) PURE;
-    STDMETHOD(GetUniquenessValue)(THIS_ LPDWORD) PURE;
-    STDMETHOD(ChangeUniquenessValue)(THIS) PURE;
+    STDMETHODIMP SetPrivateData(THIS_ REFGUID, LPVOID, DWORD, DWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->SetPrivateData( );
+		return hr;
+	}
+    STDMETHODIMP GetPrivateData(THIS_ REFGUID, LPVOID, LPDWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetPrivateData( );
+		return hr;
+	}
+    STDMETHODIMP FreePrivateData(THIS_ REFGUID)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->FreePrivateData( );
+		return hr;
+	}
+    STDMETHODIMP GetUniquenessValue(THIS_ LPDWORD)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->GetUniquenessValue( );
+		return hr;
+	}
+    STDMETHODIMP ChangeUniquenessValue(THIS)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+
+		hr = glp_DirectDrawSurface4->ChangeUniquenessValue( );
+		return hr;
+	}
 };

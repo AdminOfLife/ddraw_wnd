@@ -170,12 +170,11 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="PlaceIntoGame|Win32"
+			Name="Place into folder|Win32"
 			OutputDirectory="..\bin\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)\build\$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2"
-			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -194,13 +193,16 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				Optimization="0"
 				AdditionalIncludeDirectories="D:\usr\include; ..\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;DDRAW_EXPORTS"
-				RuntimeLibrary="2"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;DDRAW_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -214,13 +216,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="dxguid.lib"
-				LinkIncremental="1"
+				OutputFile="$(ProjectDir)..\bin\$(ConfigurationName)\$(ProjectName).dll"
+				LinkIncremental="2"
 				AdditionalLibraryDirectories="D:\usr\lib"
 				ModuleDefinitionFile="..\src\main.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
@@ -245,7 +246,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\$(ConfigurationName)\$(ProjectName).dll ..\..\..\..\..\games\Mirra"
+				CommandLine="copy /Y &quot;..\bin\$(ConfigurationName)\$(ProjectName).dll&quot; D:\games\Mirra&#x0D;&#x0A;D:\games\Mirra\NgBMX.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -276,6 +277,18 @@
 					RelativePath="..\src\d3d.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\src\d3dDevice3.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="utils"
+				>
+				<File
+					RelativePath="..\src\utils.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -297,6 +310,10 @@
 			</File>
 			<File
 				RelativePath="..\src\my_d3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\utils.h"
 				>
 			</File>
 			<Filter

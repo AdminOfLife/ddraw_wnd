@@ -19,9 +19,13 @@ ddraw_dll ddraw;
 
 LPDIRECTDRAW glp_DirectDraw;
 LPDIRECTDRAW4 glp_DirectDraw4;
+LPDIRECTDRAWSURFACE4 glp_DirectDrawSurface4;
 LPDIRECT3D3 glp_Direct3D3;
+LPDIRECT3DDEVICE3 glp_Direct3DDeviece3;
 LPDIRECT3D7 glp_Direct3D7;
 LPFAKEDIRECT3D3 glp_FakeDirect3D3;
+LPFAKEDIRECTDRAW4 glp_FakeDirectDraw4;
+LPFAKEDIRECT3DDEVICE3 glp_FakeDirect3DDevice3;
 
 void InitDirectDraw()
 {

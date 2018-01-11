@@ -2,6 +2,7 @@
 #include "common.h"
 
 #include "my_d3d.h"
+#include "DirectDrawSurface4.h"
 
 
 extern LPDIRECTDRAW4 glp_DirectDraw4;
@@ -11,7 +12,9 @@ class FakeDirectDraw4: public IDirectDraw4
 private:
 	LPDIRECTDRAW lpOrigDirectDraw;
 	LPDIRECTDRAW4 lpOrigDirectDraw4;
+	LPDIRECTDRAWSURFACE4 lpOrigDirectDrawSurface4;
 	LPDIRECT3D3 lpd3d3;
+	LPDDENUMCALLBACK origCallBack;
 public:
 	FakeDirectDraw4(LPDIRECTDRAW lpOrigDirectDraw)
 	{
@@ -19,6 +22,7 @@ public:
 		LOG(__FUNCTION__);
 		this->lpOrigDirectDraw = lpOrigDirectDraw;
 		lpd3d3 = glp_FakeDirect3D3 = new FakeDirect3D3();
+		lpOrigDirectDrawSurface4 = new FakeDirectDrawSurface4();
 		//lpd3d3 = new FakeDirect3D3();
 
 	}
@@ -59,10 +63,16 @@ public:
 		return 0; 
 	};
     STDMETHODIMP CreatePalette(THIS_ DWORD, LPPALETTEENTRY, LPDIRECTDRAWPALETTE FAR*, IUnknown FAR * ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP CreateSurface(THIS_  LPDDSURFACEDESC2 first, LPDIRECTDRAWSURFACE4 FAR * second, IUnknown FAR *)
-	{  
+    STDMETHODIMP CreateSurface(
+	  LPDDSURFACEDESC2 lpDDSurfaceDesc2,        
+	  LPDIRECTDRAWSURFACE4 FAR *lplpDDSurface,  
+	  IUnknown FAR *pUnkOuter                  
+	)
+	{
+		HRESULT hr;
 		LOG(__FUNCTION__"---PIZDEC"); 
-		return glp_DirectDraw4->CreateSurface(first, second, NULL);
+		hr = glp_DirectDraw4->CreateSurface(lpDDSurfaceDesc2, lplpDDSurface, pUnkOuter);
+		return hr;
 		//return 0; 
 	};
     STDMETHODIMP DuplicateSurface( THIS_ LPDIRECTDRAWSURFACE4, LPDIRECTDRAWSURFACE4 FAR * ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
@@ -99,11 +109,12 @@ public:
     STDMETHODIMP GetVerticalBlankStatus(THIS_ LPBOOL ) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP Initialize(THIS_ GUID FAR *) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
     STDMETHODIMP RestoreDisplayMode(THIS) {  LOG(__FUNCTION__"---PIZDEC"); return 0; };
-    STDMETHODIMP SetCooperativeLevel(THIS_ HWND first, DWORD second) 
+    STDMETHODIMP SetCooperativeLevel(THIS_ HWND hWnd, DWORD dwFlags) 
 	{  
 		LOG(__FUNCTION__);
-		fprintf(log, "HWND IS: %x\n", first);
-		glp_DirectDraw4->SetCooperativeLevel(first, second/* DDSCL_NORMAL*/);
+		fprintf(log, "HWND IS: %x\n", hWnd);
+		fprintf(log, "dwFlags: %04x\n", dwFlags);
+		glp_DirectDraw4->SetCooperativeLevel(hWnd, dwFlags /*DDSCL_FULLSCREEN | DDSCL_EXCLUSIVE /*DDSCL_NORMAL*/);
 		return 0; 
 	};
     STDMETHODIMP SetDisplayMode(
@@ -158,6 +169,27 @@ public:
 		fflush(log);
 		return hr;
 	}
+	LPDDENUMCALLBACK GetOrigEnumDevices()
+	{
+		return origCallBack;
+	}
+	static 
+	BOOL WINAPI DDEnumCallback (  GUID FAR *lpGUID,           
+		LPSTR  lpDriverDescription,   LPSTR  lpDriverName,        
+		LPVOID lpContext            
+	)
+	{
+		fprintf(
+			log,
+			"DriverDescription: %s\n"
+			"DriverName: %s\n",
+			lpDriverDescription,
+			lpDriverName
+		);
+		LPDDENUMCALLBACK  origCallBack = glp_FakeDirectDraw4->GetOrigEnumDevices();
+		HRESULT hr;
+		return hr; //origCallBack();
+	}
 	void SetDD4(LPDIRECTDRAW4 lpOrigDirectDraw4)
 	{
 		this->lpOrigDirectDraw4 = lpOrigDirectDraw4;
@@ -184,7 +216,7 @@ public:
 		LPVOID tmp;
 		LOG(__FUNCTION__);
 
-		fprintf(log, "%x-%x-%x-%x%x\n", riid.Data1, riid.Data2, riid.Data3, 
+		fprintf(log, "PRINT_GUID:\n%x-%x-%x-%x%x\n", riid.Data1, riid.Data2, riid.Data3, 
 			(int)((int*)riid.Data4)[0], (int)((int*)riid.Data4)[4]);
 		lpOrigDirectDraw->QueryInterface(riid, (LPVOID*)&tmp);
 		
@@ -212,7 +244,12 @@ public:
 	STDMETHODIMP    Compact(void) { LOG(__FUNCTION__); return 0; }
 	STDMETHODIMP    CreateClipper(DWORD, LPDIRECTDRAWCLIPPER FAR*, IUnknown FAR * ) { LOG(__FUNCTION__); return 0; }
 	STDMETHODIMP    CreatePalette(DWORD, LPPALETTEENTRY, LPDIRECTDRAWPALETTE FAR*, IUnknown FAR * ) { LOG(__FUNCTION__); return 0; }
-	STDMETHODIMP    CreateSurface(LPDDSURFACEDESC, LPDIRECTDRAWSURFACE FAR *, IUnknown FAR *) { LOG(__FUNCTION__); return 0; }
+	STDMETHODIMP    CreateSurface(LPDDSURFACEDESC, LPDIRECTDRAWSURFACE FAR *, IUnknown FAR *)
+	{
+		HRESULT hr;
+		LOG(__FUNCTION__);
+		return hr;
+	}
 	STDMETHODIMP    DuplicateSurface(LPDIRECTDRAWSURFACE, LPDIRECTDRAWSURFACE FAR * ) { LOG(__FUNCTION__); return 0; }
 	STDMETHODIMP    EnumDisplayModes(DWORD, LPDDSURFACEDESC, LPVOID, LPDDENUMMODESCALLBACK ) { LOG(__FUNCTION__); return 0; }
 	STDMETHODIMP    EnumSurfaces(DWORD, LPDDSURFACEDESC, LPVOID,LPDDENUMSURFACESCALLBACK ) { LOG(__FUNCTION__); return 0; }

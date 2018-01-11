@@ -7,6 +7,55 @@
 
 ULONG *FakeDD[3];
 
+LPDDENUMCALLBACK origDDEnumCallback = NULL;
+
+BOOL WINAPI DDEnumCallback(  
+	GUID FAR *lpGUID,           
+	LPSTR  lpDriverDescription,
+	LPSTR  lpDriverName,
+	LPVOID lpContext
+	)
+{
+	fprintf(
+		log, 
+		"DriverDescription: %s\n"
+		"DriverName: %s\n",
+		lpDriverDescription,
+		lpDriverName);
+	origDDEnumCallback(  
+		lpGUID,           
+		lpDriverDescription,
+		lpDriverName,
+		lpContext
+		);
+	return (1);
+}
+
+BOOL WINAPI 
+DDEnumCallbackEx(
+	GUID FAR *lpGUID,    
+	LPSTR     lpDriverDescription,
+	LPSTR     lpDriverName,
+	LPVOID    lpContext,
+	HMONITOR  hm
+  )
+{
+	fprintf(
+		log, 
+		"DriverDescription: %s\n"
+		"DriverName: %s\n",
+		lpDriverDescription,
+		lpDriverName);
+	origDDEnumCallback(  
+		lpGUID,           
+		lpDriverDescription,
+		lpDriverName,
+		lpContext
+		);
+	return (0);
+}
+
+
 
 NAKEDCALL void FakeAcquireDDThreadLock()			{ /*LOG(__FUNCTION__);*/  _asm { jmp [ddraw.AcquireDDThreadLock] } }
 NAKEDCALL void FakeCheckFullscreen()				{ LOG(__FUNCTION__);  _asm { jmp [ddraw.CheckFullscreen] } }
@@ -44,12 +93,18 @@ HRESULT WINAPI FakeDirectDrawEnumerateA( LPDDENUMCALLBACKA lpCallback, LPVOID lp
 {
 	HRESULT hr;
 	LOG(__FUNCTION__);
-	//_asm { jmp [ddraw.DirectDrawEnumerateA] } 
-	hr = ddraw.DirectDrawEnumerateA(lpCallback, lpContext);
+	//_asm { jmp [ddraw.DirectDrawEnumerateA] }
+	origDDEnumCallback = lpCallback;
+	fputs("here", log);
+	hr = ddraw.DirectDrawEnumerateA(DDEnumCallback, lpContext);
 	return hr;
 }
 // HRESULT WINAPI DirectDrawEnumerateExA( LPDDENUMCALLBACKEXA lpCallback, LPVOID lpContext, DWORD dwFlags );
-NAKEDCALL void FakeDirectDrawEnumerateExA()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.DirectDrawEnumerateExA] } }
+NAKEDCALL void FakeDirectDrawEnumerateExA()			
+{
+	LOG(__FUNCTION__);  
+	_asm { jmp [ddraw.DirectDrawEnumerateExA] }
+}
 // HRESULT WINAPI DirectDrawEnumerateExW( LPDDENUMCALLBACKEXW lpCallback, LPVOID lpContext, DWORD dwFlags );
 NAKEDCALL void FakeDirectDrawEnumerateExW()			{ LOG(__FUNCTION__);  _asm { jmp [ddraw.DirectDrawEnumerateExW] } }
 // HRESULT WINAPI DirectDrawEnumerateW( LPDDENUMCALLBACKW lpCallback, LPVOID lpContext );
